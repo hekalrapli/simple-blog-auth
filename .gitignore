@@ -1,0 +1,24 @@
+# Environment variables
+.env
+.env.local
+
+# SQLite database (created at runtime)
+database/*.db
+database/*.db-shm
+database/*.db-wal
+
+# Build output
+/simple-blog-auth
+main
+tmp/
+bin/
+
+# Editor / OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Logs
+*.log

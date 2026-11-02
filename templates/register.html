@@ -1,0 +1,51 @@
+{{define "content"}}
+<h1>Register</h1>
+
+<form method="POST" action="/register" class="auth-form">
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required autofocus value="{{.FormUsername}}">
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required minlength="6" value="{{.FormPassword}}">
+    </div>
+
+    <div class="form-group">
+        <label for="confirm_password">Confirm Password</label>
+        <input type="password" id="confirm_password" name="confirm_password" required value="{{.FormConfirmPassword}}">
+        {{if .ConfirmError}}
+        <p class="error-text">{{.ConfirmError}}</p>
+        {{end}}
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block">Register</button>   
+</form>
+
+
+<p class="auth-switch">Already have an account? <a href="/login">Login</a></p>
+<script>
+const password = document.getElementById('password')
+const confirm = document.getElementById('confirm_password')
+
+function checkMatch()  {
+    let err = document.querySelector('.error-text')
+    const mismatch = confirm.value.length > 0 && password.value != confirm.value
+    if(mismatch) {
+        if(!err) {
+            err = document.createElement('p');
+            err.className = 'error-text';
+            err.textContent = 'Password tidak sesuai';
+            confirm.parentNode.appendChild(err)
+        }
+        err.style.display = ''
+    }else {
+        if(err)err.style.display = 'none'
+    }
+}
+password.addEventListener('input',checkMatch);
+confirm.addEventListener('input',checkMatch);
+
+</script>
+{{end}}

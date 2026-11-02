@@ -1,0 +1,27 @@
+{{define "content"}}
+{{if .Article}}
+<h1>Edit Article</h1>
+<form method="POST" action="/articles/{{.Article.Id}}/edit" class="article-form">
+{{else}}
+<h1>New Article</h1>
+<form method="POST" action="/articles" class="article-form">
+{{end}}
+
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" value="{{if .Article}}{{.Article.Title}}{{end}}" required autofocus>
+    </div>
+
+    <div class="form-group">
+        <label for="content">Content</label>
+        <textarea id="content" name="content" rows="12" required>{{if .Article}}{{.Article.Content}}{{end}}</textarea>
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">
+            {{if .Article}}Update{{else}}Publish{{end}}
+        </button>
+        <a href="/dashboard" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+{{end}}

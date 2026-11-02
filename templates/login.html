@@ -1,0 +1,39 @@
+{{define "content"}}
+<h1>Login</h1>
+
+<form method="POST" action="/login" class="auth-form">
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required autofocus value="{{.FormUsername}}">
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+
+    <fieldset class="auth-mode">
+        <legend>Authentication Mode</legend>
+
+        <label class="radio-card">
+            <input type="radio" name="mode" value="session" checked>
+            <div class="radio-card-content">
+                <strong>Session-based</strong> <span class="badge badge-info">Stateful</span>
+                <p>Server stores session in memory. Browser sends session ID via cookie. Server looks it up on every request.</p>
+            </div>
+        </label>
+
+        <label class="radio-card">
+            <input type="radio" name="mode" value="jwt">
+            <div class="radio-card-content">
+                <strong>JWT Token</strong> <span class="badge badge-warning">Stateless</span>
+                <p>Server issues a signed JWT. Token contains user info. Server only verifies signature &mdash; no session stored.</p>
+            </div>
+        </label>
+    </fieldset>
+
+    <button type="submit" class="btn btn-primary btn-block">Login</button>
+</form>
+
+<p class="auth-switch">Don't have an account? <a href="/register">Register</a></p>
+{{end}}

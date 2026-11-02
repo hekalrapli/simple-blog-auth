@@ -1,0 +1,38 @@
+{{define "content"}}
+<h1>My Articles</h1>
+
+<p><a href="/articles/new" class="btn btn-primary">+ New Article</a></p>
+
+{{if .MyArticles}}
+<table class="article-table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Created</th>
+            <th>Updated</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{range .MyArticles}}
+        <tr>
+            <td><a href="/articles/{{.Id}}">{{.Title}}</a></td>
+            <td>{{.CreatedAt}}</td>
+            <td>{{.UpdatedAt}}</td>
+            <td class="actions-cell">
+                <a href="/articles/{{.Id}}/edit" class="btn btn-sm">Edit</a>
+                <form method="POST" action="/articles/{{.Id}}/delete" style="display:inline">
+                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this article?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {{end}}
+    </tbody>
+</table>
+{{else}}
+<div class="empty-state">
+    <p>You haven't written any articles yet.</p>
+    <p><a href="/articles/new">Write your first article!</a></p>
+</div>
+{{end}}
+{{end}}

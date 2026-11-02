@@ -1,0 +1,45 @@
+{{define "base"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Title}} &mdash; Simple Blog</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="/">Simple Blog</a>
+        </div>
+        <div class="nav-links">
+            {{if .IsLoggedIn}}
+                <span class="nav-user">{{.Username}}</span>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/articles/new">Write</a>
+                <a href="/logout">Logout</a>
+            {{else}}
+                <a href="/login">Login</a>
+                <a href="/register">Register</a>
+            {{end}}
+        </div>
+    </nav>
+
+    {{if .Error}}
+    <div class="alert alert-error">{{.Error}}</div>
+    {{end}}
+
+    {{if .Message}}
+    <div class="alert alert-success">{{.Message}}</div>
+    {{end}}
+
+    <main class="container">
+        {{block "content" .}}{{end}}
+    </main>
+
+    <footer class="footer">
+        <p>Simple Blog &mdash; Go + Stateful &amp; Stateless Auth Demo</p>
+    </footer>
+</body>
+</html>
+{{end}}

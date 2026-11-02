@@ -1,0 +1,32 @@
+{{define "content"}}
+{{if .Article}}
+<article class="article-full">
+    <h1>{{.Article.Title}}</h1>
+    <div class="article-meta">
+        by {{.Article.AuthorName}} &middot; {{.Article.CreatedAt}}
+        {{if .Article.UpdatedAt}}
+        &middot; Updated {{.Article.UpdatedAt}}
+        {{end}}
+    </div>
+    <div class="article-body">
+        {{.Article.Content}}
+    </div>
+</article>
+
+{{if .IsOwner}}
+<div class="article-actions">
+    <a href="/articles/{{.Article.Id}}/edit" class="btn">Edit</a>
+    <form method="POST" action="/articles/{{.Article.Id}}/delete" style="display:inline">
+        <button type="submit" class="btn btn-danger" onclick="return confirm('Delete this article?')">Delete</button>
+    </form>
+</div>
+{{end}}
+
+<p class="back-link"><a href="/dashboard">&larr; Back to articles</a></p>
+{{else}}
+<div class="empty-state">
+    <p>Article not found.</p>
+    <p><a href="/">&larr; Back to articles</a></p>
+</div>
+{{end}}
+{{end}}
